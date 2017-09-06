@@ -1,5 +1,12 @@
 # -*- coding: utf-8 -*-
 """
+Created on Wed Sep 06 17:00:28 2017
+
+@author: ZJ-ShaoDexin
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Created on Wed Jul 12 08:46:12 2017
 
 @author: 
@@ -11,7 +18,6 @@ import requests
 import itchat
 import time
 from bs4 import BeautifulSoup
-import csv
 keywords=[u'机器学习',u'数据挖掘',u'聚类',u'贝叶斯',u'马尔科夫',u'SVM',
           u'支持向量机',u'关联规则',u'神经网络',u'Hadoop',u'线性回归',u'逻辑斯蒂回归',u'统计回归',
           u'决策树',u'深度学习',u'回归模型',
@@ -36,14 +42,14 @@ def getLink(url,proxy=''):
     print "res:"+str(len(res))
     for item in res:
         if 'discuss' in item.find('a').attrs['href']:
-            links.append('https://www.nowcoder.com'+item.find('a').attrs['href'])
+            links.append('https://www.nowcoder.com'+item.find('a').attrs['href'].split('?')[0])
         else:
             links.append(item.find('a').attrs['href'])
     print "links:"+str(len(links))
     return links
 def getInfo(url):
     #print url
-    time.sleep(3)
+    #time.sleep(3)
     #request = urllib2.Request(url)
     response=requests.get(url,headers={'Connection':'close'},timeout=10)
     print "response=requests.get"
